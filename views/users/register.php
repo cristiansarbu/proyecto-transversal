@@ -1,22 +1,111 @@
-<div class="card p-0">
-    <div class="card-header">
-        <h3 class="card-title">Register user</h3>
-    </div>
-    <div class="card-body">
-        <form method="post" action="<?php $_SERVER['PHP_SELF']?>">
-            <div class="mb-3">
-                <label for="">Name</label>
-                <input type="text" name="name" class="form-control">
+<?php if ($_SESSION['register_form_step'] == 1) { ?>
+    <!-- Register Form -->
+    <div class="container vh-calc d-flex flex-column align-items-center justify-content-center mb-5 mb-md-0">
+        <form action="<?php $_SERVER['PHP_SELF']?>" method="post"
+              class="container col-lg-6 border shadow d-flex flex-column align-items-center py-5 px-6">
+            <div class="intro">
+                <h4>Formulario de registro</h4>
+                <p>Rellena los siguientes campos para proceder con el registro en nuestro sistema:</p>
             </div>
-            <div class="mb-3">
-                <label for="">Email</label>
-                <input type="text" name="email" class="form-control">
+            <div class="campos container px-0 mt-2">
+                <div class="row mb-3 g-3">
+                    <div class="col">
+                        <div class="inputNombre d-flex flex-column">
+                            <label for="inputNombre">Nombre</label>
+                            <input type="text" name="name" id="inputNombre" placeholder="Nombre"
+                                   class="px-2 border-form-control rounded mt-2 py-2" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputDni d-flex flex-column">
+                            <label for="inputDni">DNI</label>
+                            <input type="text" name="dni" id="inputDni" placeholder="DNI"
+                                   class="px-2 border-form-control rounded mt-2 py-2" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3 g-3">
+                    <div class="col">
+                        <div class="inputEmail d-flex flex-column">
+                            <label for="inputEmail">Correo</label>
+                            <input type="email" name="email" id="inputEmail" placeholder="Correo"
+                                   class="px-2 border-form-control rounded mt-2 py-2" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputTelefono d-flex flex-column">
+                            <label for="inputTelefono">Teléfono</label>
+                            <input type="text" name="phone" id="inputTelefono" placeholder="Teléfono"
+                                   class="px-2 border-form-control rounded mt-2 py-2" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="inputFecha d-flex flex-column">
+                            <label for="inputFecha">Fecha de nacimiento</label>
+                            <input type="date" name="date" id="inputFecha"
+                                   class="border-form-control text-secondary mt-2 py-2 px-3 rounded" required>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="">Password</label>
-                <input type="password" name="password" class="form-control">
+            <div class="container siguiente d-flex justify-content-center justify-content-md-end align-items-end mt-5">
+                <button type="submit" class="btn btn-primary text-light" name="submit1">Siguiente</button>
             </div>
-            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
         </form>
     </div>
-</div>
+<?php } else if ($_SESSION['register_form_step'] == 2) { ?>
+    <!-- Register Form for Log In Credentials -->
+    <div class="container vh-calc d-flex flex-column align-items-center justify-content-center mb-5 mb-md-0">
+        <form action="<?php $_SERVER['PHP_SELF']?>" method="post"
+              class="container col-lg-6 border shadow d-flex flex-column align-items-center py-5 p-5 px-lg-8 ">
+            <div class="intro container d-flex justify-content-start p-0">
+                <div>
+                    <h4>Formulario de registro</h4>
+                    <p>Introduce tus credenciales de usuario:</p>
+                </div>
+            </div>
+            <div class="campos container px-0 mt-2">
+                <div class="row mb-3 justify-content-between">
+                    <div class="col">
+                        <div class="inputUsuario d-flex flex-column">
+                            <label for="inputUsuari">Usuario</label>
+                            <input type="text" name="username" id="inputUsuario" placeholder="Nombre de usuario"
+                                   class="px-2 border-form-control rounded mt-2 py-2" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2 justify-content-between">
+                    <div class="col">
+                        <div class="inputContrasena d-flex flex-column">
+                            <label for="inputContrasena">Contraseña</label>
+                            <input type="password" name="password" id="inputContrasena" placeholder="Contraseña"
+                                   class="px-2 border-form-control rounded mt-2 py-2" required>
+                            <p class="text-secondary fs-8 mt-2">Debe tener al menos 5 carácteres, incluyendo mayúsculas,
+                                minúsculas y números.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3 justify-content-between">
+                    <div class="col">
+                        <!-- <div class="inputTerminos d-flex">
+                            <input type="checkbox" name="" id="inputTerminos">
+                            <label for="inputTerminos" class="ms-2 form-check-input">He leído y acepto la Política de
+                                Privacidad.</label>
+                        </div> -->
+                        <div class="inputTerminos form-check">
+                            <input type="checkbox" name="" id="inputTerminos" class="form-check-input" required>
+                            <label for="inputTerminos" class="form-check-label">He leído y acepto la Política de
+                                Privacidad.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                    class="container siguiente d-flex justify-content-center justify-content-md-end align-items-end mt-4 p-0">
+            <button type="submit" name="submit2" class="btn btn-primary text-light w-100">Registrar</button>
+            </div>
+        </form>
+    </div>
+<?php }?>
