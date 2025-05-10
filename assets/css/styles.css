@@ -1,0 +1,40 @@
+.nav-link:hover {
+  background-color: lightgray;
+}
+
+.rounded-6 {
+  border-radius: 0.6rem;
+}
+
+.vh-calc {
+  height: calc(100vh - 80px);
+}
+
+.rounded-start-pill {
+  border-top-left-radius: 25rem;
+  border-bottom-left-radius: 25rem;
+}
+
+.rounded-end-pill {
+  border-top-right-radius: 25rem;
+  border-bottom-right-radius: 25rem;
+}
+
+.border-form-control {
+  border: 1px solid #ced4da;
+}
+
+.search-icon {
+  position: relative;
+  left: 10%;
+  top: 25%;
+  z-index: 50;
+}
+
+.flex-grow-2 {
+  flex-grow: 2;
+}
+
+.flex-grow-3 {
+  flex-grow: 3;
+}

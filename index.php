@@ -1,7 +1,5 @@
 <?php
 // Start Session
-    use classes\Bootstrap;
-
     session_start();
 
 // Include different important files
@@ -26,11 +24,3 @@ $controller = $bootstrap->createController();
 if ($controller) {
     $controller->executeAction();
 }
-
-print_r($_GET);
-echo "<br><br>";
-print_r($bootstrap);
-echo "<br><br>";
-echo class_exists("controllers\\Home") ? 'Class exists' : 'Class does not exist';
-echo "<br><br>";
-echo class_exists("home") ? 'Class exists' : 'Class does not exist';

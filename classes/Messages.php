@@ -1,6 +1,5 @@
 <?php
 
-    namespace classes;
     class Messages {
         public static function setMsg($text, $type) {
             if ($type == 'error') {

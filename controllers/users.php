@@ -1,10 +1,5 @@
 <?php
 
-    namespace controllers;
-
-    use classes\Controller;
-    use models\UserModel;
-
     class Users extends Controller {
         protected function register() {
             $viewmodel = new UserModel();

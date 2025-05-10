@@ -1,6 +1,5 @@
 <?php
 
-    namespace classes;
     class Bootstrap {
         private $controller;
         private $action;

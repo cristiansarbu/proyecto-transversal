@@ -1,10 +1,5 @@
 <?php
 
-    namespace models;
-
-    use classes\Messages;
-    use classes\Model;
-
     class ShareModel extends Model {
         public function Index() {
             $this->query('SELECT * FROM shares ORDER BY create_date DESC');

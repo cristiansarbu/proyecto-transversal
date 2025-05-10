@@ -1,6 +1,5 @@
 <?php
 
-    namespace classes;
     abstract class Controller {
         protected $request;
         protected $action;

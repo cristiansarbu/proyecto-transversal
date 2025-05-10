@@ -12,5 +12,5 @@
     define("DB_PORT", "3310");
 
     // Define URL
-    define("ROOT_PATH", "/ProyectoTransversal");
-    define("ROOT_URL", "http://localhost/ProyectoTransversal");
+    define("ROOT_PATH", "/ProyectoTransversal/");
+    define("ROOT_URL", "http://localhost/ProyectoTransversal/");

@@ -1,12 +1,7 @@
 <?php
 
-    namespace controllers;
-
-    use classes\Controller;
-    use models\ShareModel;
-
     class Shares extends Controller {
-        protected function Index() {
+        protected function index() {
             $viewmodel = new ShareModel();
             $this->ReturnView($viewmodel->Index(), true);
         }

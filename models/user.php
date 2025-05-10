@@ -1,10 +1,5 @@
 <?php
 
-    namespace models;
-
-    use classes\Messages;
-    use classes\Model;
-
     class UserModel extends Model {
         public function register() {
             // Sanitize POST
