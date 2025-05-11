@@ -2,51 +2,63 @@
 
     class UserModel extends Model {
         public function register() {
+            // Sanitize POST
+            $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
             // Funcionalidad de formulario multi-página (primera página -> información personal, segunda página -> credenciales)
             // Default inicial a paso 1
             if (!isset($_SESSION['register_form_step'])) {
                 $_SESSION['register_form_step'] = 1;
             }
 
-            if (isset($_POST['submit2'])) {
-                echo "forms finished mate";
-                unset($_SESSION['register_form_step']);
+            if (isset($post['submit2'])) {
+                // Si el formulario ha sido completado
+                if ($post['username'] == '' || $post['password'] == '' || $post['politicapriv'] == '') {
+                    $_SESSION['error_signup_2'] = True;
+                } else {
+                    print_r($post);
+                    print_r($_POST);
+                    // Ambos formularios completados con datos validados
+                    $password = md5($post['password']);
+                    // Insert into MySQL
+                    $this->query('INSERT INTO paciente (dni, nombre, usuario, contrasena, correo, telefono, fecha_nac) VALUES (:dni, :name, :user, :password, :email, :phone, :dob)');
+                    $this->bind(':dni', $_SESSION['dni']);
+                    $this->bind(':name', $_SESSION['name']);
+                    $this->bind(':user', $post['username']);
+                    $this->bind(':password', $password);
+                    $this->bind(':email', $_SESSION['email']);
+                    $this->bind(':phone', $_SESSION['phone']);
+                    $this->bind(':dob', $_SESSION['date']);
+
+                    $this->execute();
+                    // Verify
+                    if ($this->lastInsertId() !== null) {
+                        // Redirect
+                        header('Location: ' . ROOT_URL . 'users/login');
+                    } else {
+                        echo "mal";
+                    }
+
+                    unset($_SESSION['register_form_step']);
+                }
             } else {
-                if (isset($_POST['submit1'])) {
-                    $_SESSION['register_form_step'] = 2;
+                // Si el formulario no ha sido completado
+                if (isset($post['submit1'])) {
+                    // Comprobar todos los campos en el server-side aparte de la comprobación required por html para el cliente
+                    if ($post['name'] == '' || $post['dni'] == '' || $post['email'] == '' || $post['phone'] == '' || $post['date'] == '') {
+                        $_SESSION['error_signup_1'] = True;
+                    } else {
+                        // Guardar datos del primer formulario en sesión para el segundo formulario
+                        $_SESSION['name'] = $post['name'];
+                        $_SESSION['dni'] = $post['dni'];
+                        $_SESSION['email'] = $post['email'];
+                        $_SESSION['phone'] = $post['phone'];
+                        $_SESSION['date'] = $post['date'];
+
+                        $_SESSION['register_form_step'] = 2;
+                    }
                 }
             }
-
-//            // Sanitize POST
-//            $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-//
-//            if (isset($post['password'])) {
-//                $password = md5($post['password']);
-//            }
-//
-//            if (isset($post['submit'])) {
-//                // Comprobar si todos los campos han sido rellenados
-//                if ($post['name'] == '' || $post['dni'] == '' || $post['email'] == '' || $post['phone'] == '' || $post['date'] == '') {
-//                    Messages::setMsg('Please fill in all fields.', 'error');
-//                    return;
-//                }
-//
-//
-//
-//
-//
-////                // Insert into MySQL
-////                $this->query('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
-////                $this->bind(':name', $post['name']);
-////                $this->bind(':email', $post['email']);
-////                $this->bind(':password', $password);
-////                $this->execute();
-//                // Verify
-//                if ($this->lastInsertId() !== null) {
-//                    // Redirect
-////                    header('Location: ' . ROOT_URL . 'users/login');
-//                }
-//            }
             return;
         }
 
