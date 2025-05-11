@@ -12,10 +12,7 @@
         }
 
         protected function logout() {
-            unset($_SESSION['is_logged_in']);
-            unset($_SESSION['USER_DATA']);
-            session_destroy();
-            // Redirect
-            header('Location: ' . ROOT_URL);
+            $viewmodel = new UserModel();
+            $this->returnView($viewmodel->logout(), true);
         }
     }

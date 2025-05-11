@@ -132,4 +132,17 @@
             }
             return;
         }
+
+        public function logout() {
+            // Sanitize Post
+            $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            if (isset($post['logout'])) {
+                unset($_SESSION['is_logged_in']);
+                unset($_SESSION['USER_DATA']);
+                session_destroy();
+                // Redirect
+                header('Location: ' . ROOT_URL);
+            }
+        }
     }
