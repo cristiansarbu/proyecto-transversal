@@ -16,30 +16,48 @@
                 if ($post['username'] == '' || $post['password'] == '' || $post['politicapriv'] == '') {
                     $_SESSION['error_signup_2'] = True;
                 } else {
-                    print_r($post);
-                    print_r($_POST);
                     // Ambos formularios completados con datos validados
                     $password = md5($post['password']);
-                    // Insert into MySQL
-                    $this->query('INSERT INTO paciente (dni, nombre, usuario, contrasena, correo, telefono, fecha_nac) VALUES (:dni, :name, :user, :password, :email, :phone, :dob)');
-                    $this->bind(':dni', $_SESSION['dni']);
-                    $this->bind(':name', $_SESSION['name']);
-                    $this->bind(':user', $post['username']);
-                    $this->bind(':password', $password);
-                    $this->bind(':email', $_SESSION['email']);
-                    $this->bind(':phone', $_SESSION['phone']);
-                    $this->bind(':dob', $_SESSION['date']);
 
-                    $this->execute();
-                    // Verify
-                    if ($this->lastInsertId() !== null) {
-                        // Redirect
-                        header('Location: ' . ROOT_URL . 'users/login');
-                    } else {
-                        echo "mal";
+                    // Comprobar que el usuario introducido es único en la base de datos
+                    $this->query('SELECT usuario FROM administrador
+                                        UNION
+                                        SELECT usuario FROM medico
+                                        UNION
+                                        SELECT usuario FROM paciente;');
+                    $results = $this->resultSet();
+
+                    $existe = False;
+                    foreach ($results as $row) {
+                        if ($row['usuario'] == $post['username']) {
+                            $existe = True;
+                            break;
+                        }
                     }
 
-                    unset($_SESSION['register_form_step']);
+                    if ($existe) {
+                        $_SESSION['error_signup_2_usuario'] = True;
+                    } else {
+                        // Insert into MySQL
+                        $this->query('INSERT INTO paciente (dni, nombre, usuario, contrasena, correo, telefono, fecha_nac) VALUES (:dni, :name, :user, :password, :email, :phone, :dob)');
+                        $this->bind(':dni', $_SESSION['dni']);
+                        $this->bind(':name', $_SESSION['name']);
+                        $this->bind(':user', $post['username']);
+                        $this->bind(':password', $password);
+                        $this->bind(':email', $_SESSION['email']);
+                        $this->bind(':phone', $_SESSION['phone']);
+                        $this->bind(':dob', $_SESSION['date']);
+
+                        $this->execute();
+                        // Verify
+                        if ($this->lastInsertId() !== null) {
+                            // Redirect
+                            header('Location: ' . ROOT_URL . 'users/login');
+                        }
+
+                        unset($_SESSION['register_form_step']);
+                    }
+
                 }
             } else {
                 // Si el formulario no ha sido completado
