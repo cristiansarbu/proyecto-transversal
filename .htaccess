@@ -1,3 +1,5 @@
 Options +FollowSymLinks
 RewriteEngine on
-RewriteRule ^([a-zA-Z]*)/?([a-zA-Z]*)?/?([a-zA-Z0-9]*)?/?$ index.php?controller=$1&action=$2&id=$3 [NC,L]
+# QSA -> Query String Append para poder usar query parameters con los controladores
+RewriteRule ^([a-zA-Z]*)/?([a-zA-Z]*)?/?([a-zA-Z0-9]*)?/?$ index.php?controller=$1&action=$2&id=$3 [NC,L,QSA]
+
