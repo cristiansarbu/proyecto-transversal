@@ -72,7 +72,7 @@
     <div class="container col-lg-9 mt-5">
         <h5>Acciones</h5>
         <div class="container p-0">
-            <button type="button" class="btn btn-primary me-1">Añadir médico</button>
+            <a href="<?php echo ROOT_URL . 'admin/registerDoctor' ?>"><button type="button" class="btn btn-primary me-1">Añadir médico</button></a>
             <button type="button" class="btn btn-secondary me-4">Eliminar médico</button>
             <button type="button" class="btn btn-secondary">Eliminar paciente</button>
         </div>
