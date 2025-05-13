@@ -101,10 +101,12 @@
 
                 if ($row) {
                     if ($row['tipo'] == 'admin') {
+                        $_SESSION['user_type'] = 'admin';
                         $_SESSION['is_logged_in'] = true;
                         header('Location: ' . ROOT_URL . 'admin');
 
                     } elseif ($row['tipo'] == 'paciente') {
+                        $_SESSION['user_type'] = 'paciente';
                         $this->query("SELECT * FROM paciente WHERE usuario = :username");
                         $this->bind(':username', $post['username']);
                         $this->execute();
@@ -124,6 +126,7 @@
                         header('Location: ' . ROOT_URL . 'appointments/patient-appointments');
 
                     } elseif ($row['tipo'] == 'medico') {
+                        $_SESSION['user_type'] = 'medico';
                         $this->query("SELECT * FROM medico WHERE usuario = :username");
                         $this->bind(':username', $post['username']);
                         $this->execute();
