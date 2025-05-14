@@ -15,11 +15,10 @@
 
             // Sacar número máximo de páginas posibles para luego limitar la paginación
             $this->query('SELECT COUNT(*) FROM medico');
-            $elementos = $this->single();
+            $elementos = $this->single()['COUNT(*)'];
 
             // dividir entre 3 (número de elementos por página) y redondear hacia arriba
             $paginas = ceil($elementos / 3);
-
 
             $this->query("SELECT dni, nombre, correo, telefono, especialidad, consulta 
                                 FROM medico

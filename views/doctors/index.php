@@ -28,7 +28,7 @@
 
 <div class="container d-flex flex-column gap-5 mb-7">
     <!-- Cards with Doctors -->
-    <?php foreach ($viewmodel as $medico) { ?>
+    <?php foreach ($viewmodel[0] as $medico) { ?>
         <div class="container doctor-card border d-flex flex-column p-4 rounded">
             <div class="nombre-especialidad d-flex flex-column flex-md-row gap-1 gap-md-5 align-items-center mb-2">
                 <h2 class="m-0">Dr. <?php echo $medico['nombre'] ?></h2>
@@ -127,9 +127,9 @@
             </li>
             <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'doctors?page=' . ($_GET['page'] - 1) ?>"><?php echo ($_GET['page']) ?></a></li>
             <li class="page-item active"><a class="page-link" href="<?php echo ROOT_URL . 'doctors?page=' . ($_GET['page']) ?>"><?php echo ($_GET['page'] + 1) ?></a></li>
-            <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'doctors?page=' . ($_GET['page'] + 1) ?>"><?php echo ($_GET['page'] + 2) ?></a></li>
+            <li class="page-item"><a class="page-link" href="<?php echo $_GET['page'] != $viewmodel[1] - 1 ? ROOT_URL . 'doctors?page=' . ($_GET['page'] + 1) : ROOT_URL . 'doctors?page=' . $_GET['page'] ?>"><?php echo $_GET['page'] != $viewmodel[1] - 1 ? ($_GET['page'] + 2) : '-' ?></a></li>
             <li class="page-item">
-                <a class="page-link" href="<?php echo ROOT_URL . 'doctors?page=' . ($_GET['page'] + 1) ?>">
+                <a class="page-link" href="<?php echo $_GET['page'] != $viewmodel[1] - 1 ? ROOT_URL . 'doctors?page=' . ($_GET['page'] + 1) : ROOT_URL . 'doctors?page=' . $_GET['page']?>">
                     <span>&raquo;</span>
                 </a>
             </li>
