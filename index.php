@@ -15,12 +15,14 @@ require('controllers/shares.php');
 require('controllers/users.php');
 require('controllers/admin.php');
 require('controllers/doctors.php');
+require('controllers/contactForms.php');
 
 require('models/home.php');
 require('models/share.php');
 require('models/user.php');
 require('models/admin.php');
 require('models/doctors.php');
+require('models/contactForms.php');
 
 
 $bootstrap = new Bootstrap($_GET);

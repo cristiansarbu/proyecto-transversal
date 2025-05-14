@@ -8,7 +8,8 @@
             // Paginación con query parameters (similar a paginación con MVC en Express.js)
             // /doctors?page=1
             if (!isset($get['page'])) {
-                $page = 1;
+                $page = 0;
+                $_GET['page'] = 0;
             } else {
                 $page = $get['page'];
             }
