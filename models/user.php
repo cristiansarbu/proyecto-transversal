@@ -103,6 +103,14 @@
                     if ($row['tipo'] == 'admin') {
                         $_SESSION['user_type'] = 'admin';
                         $_SESSION['is_logged_in'] = true;
+                        $this->query("SELECT * FROM administrador WHERE usuario = :username");
+                        $this->bind(':username', $post['username']);
+                        $this->execute();
+                        $row = $this->single();
+
+                        $_SESSION['USER_DATA'] = array(
+                            "id" => $row['id_admin']
+                        );
                         header('Location: ' . ROOT_URL . 'admin');
 
                     } elseif ($row['tipo'] == 'paciente') {
