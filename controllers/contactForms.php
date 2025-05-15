@@ -11,5 +11,15 @@
             $this->returnView($viewmodel->details(), true);
         }
 
+        protected function create() {
+            $viewmodel = new ContactFormsModel();
+            $this->returnView($viewmodel->create(), true);
+        }
+
+        protected function success() {
+            $viewmodel = new ContactFormsModel();
+            $this->returnView($viewmodel->success(), true);
+        }
+
     }
 

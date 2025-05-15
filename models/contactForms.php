@@ -45,4 +45,12 @@
 
             return $this->resultSet();
         }
+
+        public function create() {
+
+        }
+
+        public function success() {
+
+        }
     }
