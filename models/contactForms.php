@@ -24,8 +24,10 @@
             $this->query("SELECT nombre, correo, telefono, id_solicitud, fecha 
                                 FROM solicitud s
                                 JOIN paciente p ON s.id_paciente = p.id_usuario
+                                WHERE id_medico = :id
                                 LIMIT 3 OFFSET :off");
             $this->bind(':off', $page  * 3);
+            $this->bind(':id', $_SESSION['USER_DATA']['id']);
             // Siempre habrá 3 elementos en cada página -> offset siempre es página * 3
             $formularios = $this->resultSet();
 

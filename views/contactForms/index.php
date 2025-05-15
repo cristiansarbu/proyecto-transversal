@@ -52,38 +52,40 @@
     <?php } ?>
 </div>
 
-<!-- Pagination -->
-<!-- Hecho utilizando la query parameter "page" con índice 0 (+1 para no mostrar al usuario índice 0) -->
-<nav aria-label="Page navigation example" class="d-flex justify-content-center mb-7">
-    <ul class="pagination">
-        <?php if ($_GET['page'] == 0) { ?>
-            <li class="page-item">
-                <a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=0' ?>">
-                    <span>&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=0' ?>">1</a></li>
-            <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=1' ?>">2</a></li>
-            <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=2' ?>">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=1' ?>">
-                    <span>&raquo;</span>
-                </a>
-            </li>
-        <?php } else { ?>
-            <li class="page-item">
-                <a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=' . ($_GET['page'] - 1) ?>">
-                    <span>&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=' . ($_GET['page'] - 1) ?>"><?php echo ($_GET['page']) ?></a></li>
-            <li class="page-item active"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=' . ($_GET['page']) ?>"><?php echo ($_GET['page'] + 1) ?></a></li>
-            <li class="page-item"><a class="page-link" href="<?php echo $_GET['page'] != $viewmodel[1] - 1 ? ROOT_URL . 'contactForms?page=' . ($_GET['page'] + 1) : ROOT_URL . 'contactForms?page=' . $_GET['page'] ?>"><?php echo $_GET['page'] != $viewmodel[1] - 1 ? ($_GET['page'] + 2) : '-' ?></a></li>
-            <li class="page-item">
-                <a class="page-link" href="<?php echo $_GET['page'] != $viewmodel[1] - 1 ? ROOT_URL . 'contactForms?page=' . ($_GET['page'] + 1) : ROOT_URL . 'contactForms?page=' . $_GET['page']?>">
-                    <span>&raquo;</span>
-                </a>
-            </li>
-        <?php } ?>
-    </ul>
-</nav>
+<?php if ($viewmodel[1] > 1) { ?>
+    <!-- Pagination -->
+    <!-- Hecho utilizando la query parameter "page" con índice 0 (+1 para no mostrar al usuario índice 0) -->
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center mb-7">
+        <ul class="pagination">
+            <?php if ($_GET['page'] == 0) { ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=0' ?>">
+                        <span>&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=0' ?>">1</a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=1' ?>">2</a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=2' ?>">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=1' ?>">
+                        <span>&raquo;</span>
+                    </a>
+                </li>
+            <?php } else { ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=' . ($_GET['page'] - 1) ?>">
+                        <span>&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=' . ($_GET['page'] - 1) ?>"><?php echo ($_GET['page']) ?></a></li>
+                <li class="page-item active"><a class="page-link" href="<?php echo ROOT_URL . 'contactForms?page=' . ($_GET['page']) ?>"><?php echo ($_GET['page'] + 1) ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo $_GET['page'] != $viewmodel[1] - 1 ? ROOT_URL . 'contactForms?page=' . ($_GET['page'] + 1) : ROOT_URL . 'contactForms?page=' . $_GET['page'] ?>"><?php echo $_GET['page'] != $viewmodel[1] - 1 ? ($_GET['page'] + 2) : '-' ?></a></li>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo $_GET['page'] != $viewmodel[1] - 1 ? ROOT_URL . 'contactForms?page=' . ($_GET['page'] + 1) : ROOT_URL . 'contactForms?page=' . $_GET['page']?>">
+                        <span>&raquo;</span>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </nav>
+<?php } ?>
