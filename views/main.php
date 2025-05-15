@@ -160,9 +160,9 @@
 </div>
 
 <!-- Bootstrap Bundle Normal con Popper -->
-<script src="../assets/js/bootstrap.bundle.js"></script>
+<script src="/ProyectoTransversal/assets/js/bootstrap.bundle.js"></script>
 <!-- Incluir scripts misc (botón para volver a página anterior, etc.) -->
-<script src="../assets/js/misc.js"></script>
+<script src="/ProyectoTransversal/assets/js/misc.js"></script>
 
 </body>
 </html>

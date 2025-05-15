@@ -33,4 +33,16 @@
 
             return [$formularios, $paginas];
         }
+
+        public function details() {
+            // Sanitize the GET array
+            $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+            print_r($get);
+
+            $this->query("SELECT s.descripcion, s.fecha, p.nombre, p.dni, p.correo, p.telefono, p.fecha_nac
+                                FROM solicitud s
+                                JOIN paciente p ON s.id_paciente = p.id_usuario");
+
+            return $this->resultSet();
+        }
     }

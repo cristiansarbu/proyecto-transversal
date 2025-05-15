@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="d-flex botones gap-3 mt-4 mt-md-0">
-                    <a href="/html/doctor-registrado/detalle-formulario.html">
+                    <a href="<?php echo ROOT_URL . 'contactForms/details/' . $form['id_solicitud'] ?>">
                         <button type="button" class="btn text-dark btn-outline-secondary fl px-5">Ver detalles</button>
                     </a>
                     <button type="button" class="btn btn-dark text-ligh px-4">Eliminar</button>

@@ -6,5 +6,10 @@
             $this->returnView($viewmodel->index(), true);
         }
 
+        protected function details() {
+            $viewmodel = new ContactFormsModel();
+            $this->returnView($viewmodel->details(), true);
+        }
+
     }
 
