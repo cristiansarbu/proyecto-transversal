@@ -33,7 +33,7 @@
                         class="container doctor-card border d-flex flex-column align-items-md-center align-items-lg-stretch p-4 rounded">
                         <div
                             class="nombre-especialidad d-flex flex-column flex-lg-row gap-3 gap-lg-4 align-items-center mb-2">
-                            <h5 class="m-0"><?php echo $viewmodel[0]['nombre'] ?></h2>
+                            <h5 class="m-0"><?php echo $viewmodel[0]['nombre'] ?></h5>
                                 <div class="badge rounded-pill border text-dark fs-6">
                                     <span class="align-middle">Médico de familia</span>
                                 </div>

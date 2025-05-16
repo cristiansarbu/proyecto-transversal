@@ -16,8 +16,16 @@ if (document.getElementById('back2')) {
 }
 
 if (document.getElementById('back3')) {
-    const botonVuelta3 = document.getElementById("back2");
-    botonVuelta2.addEventListener('click', function() {
+    const botonVuelta3 = document.getElementById("back3");
+    botonVuelta3.addEventListener('click', function() {
         history.back();
     })
 }
+
+if (document.getElementById('back4')) {
+    const botonVuelta4 = document.getElementById("back4");
+    botonVuelta4.addEventListener('click', function() {
+        history.back();
+    })
+}
+
