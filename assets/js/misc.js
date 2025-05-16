@@ -14,3 +14,10 @@ if (document.getElementById('back2')) {
         history.back();
     })
 }
+
+if (document.getElementById('back3')) {
+    const botonVuelta3 = document.getElementById("back2");
+    botonVuelta2.addEventListener('click', function() {
+        history.back();
+    })
+}

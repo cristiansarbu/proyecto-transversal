@@ -10,7 +10,7 @@
             </span>
         <div class="d-flex justify-content-end w-100">
             <div class="botones mt-3">
-                <a href="/html/paciente-registrado/citaspaciente.html">
+                <a href="<?php echo ROOT_URL . 'appointments/patientAppointments' ?>">
                     <button type="button" class="btn btn-primary text-light">Siguiente</button>
                 </a>
             </div>

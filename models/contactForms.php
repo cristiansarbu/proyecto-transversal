@@ -47,7 +47,39 @@
         }
 
         public function create() {
+            print_r($_SESSION);
+            // Sanitize the GET array
+            $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+            // Sanitize the POST array
+            $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+            $this->query("SELECT nombre, consulta, correo, telefono
+                                FROM medico
+                                WHERE id_usuario = :id_medico");
+            $this->bind(':id_medico', $get['id']);
+
+            if (isset($post['submit'])) {
+                if ($post['fecha'] == "" || $post['motivo-formulario'] == "") {
+                    $_SESSION['error_contactForms_create'] = True;
+                } else {
+                    // Sanitize the POST array
+                    $post2 = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                    $this->query("INSERT INTO solicitud
+                                        (id_paciente, id_medico, descripcion, fecha)
+                                        VALUES (:id_paciente, :id_medico, :desc, :fecha)");
+                    $this->bind(':id_paciente', $_SESSION['USER_DATA']['id']);
+                    $this->bind(':id_medico', $get['id']);
+                    $this->bind(':desc', $post2['motivo-formulario']);
+                    $this->bind(':fecha', $post2['fecha']);
+                    $this->execute();
+
+                    header('Location: ' . ROOT_URL . 'contactForms/success');
+                    return '';
+                }
+            }
+
+            return $this->resultSet();
         }
 
         public function success() {

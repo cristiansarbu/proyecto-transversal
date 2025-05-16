@@ -21,7 +21,7 @@
             // dividir entre 3 (número de elementos por página) y redondear hacia arriba
             $paginas = ceil($elementos / 3);
 
-            $this->query("SELECT dni, nombre, correo, telefono, especialidad, consulta 
+            $this->query("SELECT id_usuario, dni, nombre, correo, telefono, especialidad, consulta 
                                 FROM medico
                                 LIMIT 3 OFFSET :off");
             $this->bind(':off', $page * 3);
