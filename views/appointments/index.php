@@ -1,6 +1,6 @@
 <!-- Buttons for the current view (pestaña actual) -->
 <div class="container d-flex justify-content-end gap-2 mt-5 mb-5">
-    <a href="/html/doctor-registrado/crearcita.html">
+    <a href="<?php echo ROOT_URL . 'appointments/createAppointment' ?>">
         <button type="button" class="btn btn-light btn-outline-secondary px-5">Crear cita</button>
     </a>
 </div>

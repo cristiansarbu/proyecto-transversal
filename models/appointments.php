@@ -123,6 +123,28 @@
         }
 
         public function createAppointment() {
+            print_r($_SESSION['USER_DATA']);
+            // Sanitize the POST array
+            $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+            if (isset($post['submit'])) {
+                $this->query('SELECT id_usuario FROM paciente
+                                    WHERE dni = :dni');
+                $this->bind(':dni', $post['dni']);
+                $id_paciente = $this->single()['id_usuario'];
+
+                $this->query('INSERT INTO cita (fecha, motivo, estado, id_medico, id_paciente)
+                                    VALUES (:fecha, :motivo, :estado, :id_medico, :id_paciente)');
+                $this->bind(':fecha', $post['fechahora']);
+                $this->bind(':motivo', $post['motivo']);
+                $this->bind(':estado', $post['estado']);
+                $this->bind(':id_medico', $_SESSION['USER_DATA']['id']);
+                $this->bind(':id_paciente', $id_paciente);
+                $this->execute();
+
+                header('Location: ' . ROOT_URL . 'appointments');
+                return '';
+            }
+            return '';
         }
     }

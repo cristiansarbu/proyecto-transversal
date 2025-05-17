@@ -29,3 +29,10 @@ if (document.getElementById('back4')) {
     })
 }
 
+if (document.getElementById('back5')) {
+    const botonVuelta5 = document.getElementById("back5");
+    botonVuelta5.addEventListener('click', function() {
+        history.back();
+    })
+}
+
