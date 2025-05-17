@@ -28,7 +28,7 @@
         <div class="container doctor">
             <div class="row">
                 <div class="col p-0">
-                    <label for="" class="mt-2 mb-2">Información del médico</label>
+                    <label for="" class="mt-2 mb-2 h6">Información del médico</label>
                     <div
                         class="container doctor-card border d-flex flex-column align-items-md-center align-items-lg-stretch p-4 rounded">
                         <div
@@ -74,6 +74,34 @@
                             <p class="m-0"><?php echo $viewmodel[0]['telefono'] ?></p>
                         </div>
                     </div>
+
+                    <?php if (isset($_SESSION['error_contactForms_create'])) { ?>
+                        <!-- Warning alert para register fallido -->
+                        <div class="alert alert-danger d-flex align-items-center mt-3 gap-3 w-100" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                <path
+                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                            </svg>
+                            <div>
+                                Error. Debe completar todos los campos.
+                            </div>
+                        </div>
+                    <?php } unset($_SESSION['error_contactForms_create']) ?>
+
+                    <?php if (isset($_SESSION['error_contactForms_create2'])) { ?>
+                        <!-- Warning alert para register fallido -->
+                        <div class="alert alert-danger d-flex align-items-center mt-3 gap-3 w-100" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                <path
+                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                            </svg>
+                            <div>
+                                Error. No se ha podido crear el formulario. Intentálo más tarde.
+                            </div>
+                        </div>
+                    <?php } unset($_SESSION['error_contactForms_create2']) ?>
                 </div>
             </div>
         </div>

@@ -65,7 +65,6 @@
                 exit();
             }
 
-            print_r($_SESSION);
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             // Sanitize the POST array
@@ -83,14 +82,19 @@
                     // Sanitize the POST array
                     $post2 = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-                    $this->query("INSERT INTO solicitud
+                    try {
+                        $this->query("INSERT INTO solicitud
                                         (id_paciente, id_medico, descripcion, fecha)
                                         VALUES (:id_paciente, :id_medico, :desc, :fecha)");
-                    $this->bind(':id_paciente', $_SESSION['USER_DATA']['id']);
-                    $this->bind(':id_medico', $get['id']);
-                    $this->bind(':desc', $post2['motivo-formulario']);
-                    $this->bind(':fecha', $post2['fecha']);
-                    $this->execute();
+                        $this->bind(':id_paciente', $_SESSION['USER_DATA']['id']);
+                        $this->bind(':id_medico', $get['id']);
+                        $this->bind(':desc', $post2['motivo-formulario']);
+                        $this->bind(':fecha', $post2['fecha']);
+                        $this->execute();
+                    } catch(Exception $exception) {
+                        $_SESSION['error_contactForms_create2'] = True;
+                        return '';
+                    }
 
                     header('Location: ' . ROOT_URL . 'contactForms/success');
                     return '';

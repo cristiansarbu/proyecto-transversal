@@ -122,16 +122,23 @@
             if (isset($_POST['submit'])) {
                 // Sanitize the GET array
                 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $this->query("UPDATE cita
+
+                try {
+                    $this->query("UPDATE cita
                                     SET motivo = :motivo, fecha = :fecha, estado = :estado
                                     WHERE fecha = :fecha_antigua AND id_medico = :id_med AND id_paciente = :id_pac");
-                $this->bind(':motivo', $post['motivo']);
-                $this->bind(':fecha', $post['fecha']);
-                $this->bind(':estado', $post['estado']);
-                $this->bind(':fecha_antigua', $resultados[0]['fecha']);
-                $this->bind(':id_med', $get['idmed']);
-                $this->bind(':id_pac', $get['idpac']);
-                $this->execute();
+                    $this->bind(':motivo', $post['motivo']);
+                    $this->bind(':fecha', $post['fecha']);
+                    $this->bind(':estado', $post['estado']);
+                    $this->bind(':fecha_antigua', $resultados[0]['fecha']);
+                    $this->bind(':id_med', $get['idmed']);
+                    $this->bind(':id_pac', $get['idpac']);
+                    $this->execute();
+
+                } catch (Exception $exception) {
+                    $_SESSION['error_appointments_update'] = True;
+                    return '';
+                }
 
                 header('Location: ' . ROOT_URL . 'appointments');
                 return '';
@@ -154,19 +161,35 @@
                 $this->query('SELECT id_usuario FROM paciente
                                     WHERE dni = :dni');
                 $this->bind(':dni', $post['dni']);
-                $id_paciente = $this->single()['id_usuario'];
+                if (isset($this->single()['id_usuario'])) {
+                    $id_paciente = $this->single()['id_usuario'];
+                } else {
+                    $_SESSION['error_appointments_create'] = True;
+                    return '';
+                }
 
-                $this->query('INSERT INTO cita (fecha, motivo, estado, id_medico, id_paciente)
+                try {
+                    $this->query('INSERT INTO cita (fecha, motivo, estado, id_medico, id_paciente)
                                     VALUES (:fecha, :motivo, :estado, :id_medico, :id_paciente)');
-                $this->bind(':fecha', $post['fechahora']);
-                $this->bind(':motivo', $post['motivo']);
-                $this->bind(':estado', $post['estado']);
-                $this->bind(':id_medico', $_SESSION['USER_DATA']['id']);
-                $this->bind(':id_paciente', $id_paciente);
-                $this->execute();
+                    $this->bind(':fecha', $post['fechahora']);
+                    $this->bind(':motivo', $post['motivo']);
+                    $this->bind(':estado', $post['estado']);
+                    $this->bind(':id_medico', $_SESSION['USER_DATA']['id']);
+                    $this->bind(':id_paciente', $id_paciente);
+                    $this->execute();
+                } catch (Exception $exception) {
+                    $_SESSION['error_appointments_create'] = True;
+                    return '';
+                }
 
-                header('Location: ' . ROOT_URL . 'appointments');
-                return '';
+                // Verify
+                if ($this->lastInsertId() !== null) {
+                    // Redirect
+                    header('Location: ' . ROOT_URL . 'appointments');
+                    return '';
+                } else {
+                        $_SESSION['error_appointments_create'] = True;
+                }
             }
             return '';
         }
