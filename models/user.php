@@ -69,6 +69,25 @@
                 // Si el formulario no ha sido completado
                 if (isset($post['submit1'])) {
                     // Comprobar todos los campos en el server-side aparte de la comprobación required por html para el cliente
+
+                    $this->query("SELECT correo FROM paciente");
+                    $correos = $this->resultSet();
+                    foreach ($correos as $fila) {
+                        if ($fila['correo'] == $post['email']) {
+                            $_SESSION['error_signup_1_email'] = True;
+                            return '';
+                        }
+                    }
+
+                    $this->query("SELECT dni from paciente");
+                    $dnis = $this->resultSet();
+                    foreach ($dnis as $fila) {
+                        if ($fila['dni'] == $post['dni']) {
+                            $_SESSION['error_signup_1_dni'] = True;
+                            return '';
+                        }
+                    }
+
                     if ($post['name'] == '' || $post['dni'] == '' || $post['email'] == '' || $post['phone'] == '' || $post['date'] == '') {
                         $_SESSION['error_signup_1'] = True;
                     } else {
