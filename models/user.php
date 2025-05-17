@@ -131,7 +131,7 @@
                             "phone" => $row['telefono'],
                             "dob" => $row['fecha_nac']
                         );
-                        header('Location: ' . ROOT_URL . 'appointments/patient-appointments');
+                        header('Location: ' . ROOT_URL . 'appointments/patientAppointments');
 
                     } elseif ($row['tipo'] == 'medico') {
                         $_SESSION['user_type'] = 'medico';

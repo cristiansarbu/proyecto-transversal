@@ -20,43 +20,121 @@
 
     <title>LogroSalud</title>
 </head>
+
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-light mt-3 pb-3 shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="#">LogroSalud</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navmenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item pe-4">
-                    <a href="#" class="nav-link rounded-6 px-4 active">Home</a>
-                </li>
-                <li class="nav-item pe-4">
-                    <a href="/html/general/medicos.html" class="nav-link rounded-6 px-4">Médicos</a>
-                </li>
-                <li class="nav-item pe-4">
-                    <a href="/html/login-signup/login.html" class="nav-link rounded-6 px-4">Iniciar sesión</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/html/login-signup/register.html" class="nav-link rounded-6 px-4">Registrarse</a>
-                </li>
-            </ul>
+
+<!-- Navbar para usuarios sin sesión iniciada -->
+<?php if (!isset($_SESSION['is_logged_in'])) { ?>
+    <nav class="navbar navbar-expand-md navbar-light mt-3 pb-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">LogroSalud</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Para cada item de la navbar, utilizo $_SERVER['REQUEST_URI'] (página actual) y ROOT_PATH para decidir si añadir la clase active de bs5 (es la página activa) -->
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH ? "active" : "" ?>">Home</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'doctors' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'doctors' ? "active" : "" ?>">Médicos</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'users/login' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'users/login' ? "active" : "" ?>">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo ROOT_URL . 'users/register' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'users/register' ? "active" : "" ?>">Registrarse</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <!--    <ul class="nav nav-pills">-->
-    <!--        --><?php //if (isset($_SESSION['is_logged_in']) && isset($_SESSION['USER_DATA']['name'])) :?>
-    <!--            <li class="nav-item"><a href="--><?php //echo ROOT_URL; ?><!--" class="nav-link" aria-current="page">Welcome --><?php //echo $_SESSION['USER_DATA']['name']; ?><!--</a></li>-->
-    <!--            <li class="nav-item"><a href="--><?php //echo ROOT_URL; ?><!--shares" class="nav-link" aria-current="page">Shares</a></li>-->
-    <!--            <li class="nav-item"><a href="--><?php //echo ROOT_URL; ?><!--users/logout" class="nav-link" aria-current="page">Logout</a></li>-->
-    <!--        --><?php //else : ?>
-    <!--            <li class="nav-item"><a href="--><?php //echo ROOT_URL; ?><!--" class="nav-link" aria-current="page">Home</a></li>-->
-    <!--            <li class="nav-item"><a href="--><?php //echo ROOT_URL; ?><!--users/login" class="nav-link" aria-current="page">Login</a></li>-->
-    <!--            <li class="nav-item"><a href="--><?php //echo ROOT_URL; ?><!--users/register" class="nav-link" aria-current="page">Register</a></li>-->
-    <!--        --><?php //endif; ?>
-    <!--    </ul>-->
-</nav>
+    </nav>
+<?php }?>
+
+<!-- Navbar para paciente con sesión iniciada -->
+<?php if (isset($_SESSION['is_logged_in']) && ($_SESSION['user_type'] == 'paciente')) { ?>
+    <nav class="navbar navbar-expand-md navbar-light mt-3 pb-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">LogroSalud</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Para cada item de la navbar, utilizo $_SERVER['REQUEST_URI'] (página actual) y ROOT_PATH para decidir si añadir la clase active de bs5 (es la página activa) -->
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH ? "active" : "" ?>">Home</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'appointments/patientAppointments' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'appointments/patientAppointments' ? "active" : "" ?>">Mis Citas</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'doctors' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'doctors' ? "active" : "" ?>">Médicos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo ROOT_URL . 'users/logout' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'users/logout' ? "active" : "" ?>">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<?php }?>
+
+<!-- Navbar para médico con sesión iniciada -->
+<?php if (isset($_SESSION['is_logged_in']) && ($_SESSION['user_type'] == 'medico')) { ?>
+    <nav class="navbar navbar-expand-md navbar-light mt-3 pb-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">LogroSalud</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Para cada item de la navbar, utilizo $_SERVER['REQUEST_URI'] (página actual) y ROOT_PATH para decidir si añadir la clase active de bs5 (es la página activa) -->
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH ? "active" : "" ?>">Home</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'appointments' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'appointments' ? "active" : "" ?>">Mis Citas</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'contactForms' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'contactForms' ? "active" : "" ?>">Formularios de contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo ROOT_URL . 'users/logout' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'users/logout' ? "active" : "" ?>">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<?php }?>
+
+<!-- Navbar para admin con sesión iniciada -->
+<?php if (isset($_SESSION['is_logged_in']) && ($_SESSION['user_type'] == 'admin')) { ?>
+    <nav class="navbar navbar-expand-md navbar-light mt-3 pb-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">LogroSalud</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Para cada item de la navbar, utilizo $_SERVER['REQUEST_URI'] (página actual) y ROOT_PATH para decidir si añadir la clase active de bs5 (es la página activa) -->
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH ? "active" : "" ?>">Home</a>
+                    </li>
+                    <li class="nav-item pe-4">
+                        <a href="<?php echo ROOT_URL . 'admin' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'admin' ? "active" : "" ?>">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo ROOT_URL . 'users/logout' ?>" class="nav-link rounded-6 px-4 <?php echo $_SERVER['REQUEST_URI'] == ROOT_PATH . 'users/logout' ? "active" : "" ?>">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<?php }?>
 
     <?php Messages::display() ?>
     <?php require($view); ?>
