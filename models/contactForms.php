@@ -2,6 +2,12 @@
 
     class ContactFormsModel extends Model {
         public function Index() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'medico')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             // Paginación con query parameters (similar a paginación con MVC en Express.js)
@@ -35,6 +41,12 @@
         }
 
         public function details() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'medico')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             print_r($get);
@@ -47,6 +59,12 @@
         }
 
         public function create() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'paciente')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             print_r($_SESSION);
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
@@ -83,6 +101,10 @@
         }
 
         public function success() {
-
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'paciente')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
         }
     }

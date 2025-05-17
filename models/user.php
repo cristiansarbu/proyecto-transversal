@@ -2,6 +2,12 @@
 
     class UserModel extends Model {
         public function register() {
+            // Autorización
+            if (isset($_SESSION['is_logged_in'])) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize POST
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -81,6 +87,12 @@
         }
 
         public function login() {
+            // Autorización
+            if (isset($_SESSION['is_logged_in'])) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize Post
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -163,6 +175,12 @@
         }
 
         public function logout() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in'])) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize Post
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 

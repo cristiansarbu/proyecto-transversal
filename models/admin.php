@@ -2,6 +2,12 @@
 
     class AdminModel extends Model {
         public function index() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'admin')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             $this->query("SELECT COUNT(*) AS num FROM medico");
             $numMedicos = $this->single()["num"];
 
@@ -23,6 +29,12 @@
         }
 
         public function registerDoctor() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'admin')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize POST
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 

@@ -2,6 +2,12 @@
 
     class AppointmentsModel extends Model {
         public function Index() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'medico')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
@@ -49,6 +55,12 @@
         }
 
         public function patientAppointments() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'paciente')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
@@ -90,6 +102,12 @@
         }
 
         public function editAppointment() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'medico')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
@@ -123,6 +141,12 @@
         }
 
         public function createAppointment() {
+            // Autorización
+            if (!isset($_SESSION['is_logged_in']) || ($_SESSION['user_type'] != 'medico')) {
+                header('Location: ' . ROOT_URL );
+                exit();
+            }
+
             // Sanitize the POST array
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
