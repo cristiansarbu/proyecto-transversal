@@ -123,7 +123,7 @@
                 </li>
                 <li class="page-item active"><a class="page-link" href="<?php echo ROOT_URL . 'appointments/patientAppointments?page=0' ?>">1</a></li>
                 <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'appointments/patientAppointments?page=1' ?>">2</a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo ROOT_URL . 'appointments/patientAppointments?page=2' ?>">3</a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo $viewmodel[1] > 2 ? ROOT_URL . 'appointments/patientAppointments?page=2' : '#' ?>"><?php echo $viewmodel[1] > 2 ? '3' : '-' ?></a></li>
                 <li class="page-item">
                     <a class="page-link" href="<?php echo ROOT_URL . 'appointments/patientAppointments?page=1' ?>">
                         <span>&raquo;</span>
