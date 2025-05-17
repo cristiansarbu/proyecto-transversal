@@ -20,4 +20,9 @@
             $viewmodel = new AppointmentsModel();
             $this->ReturnView($viewmodel->createAppointment(), true);
         }
+
+        protected function requestAppointment() {
+            $viewmodel = new AppointmentsModel();
+            $this->ReturnView($viewmodel->requestAppointment(), true);
+        }
     }

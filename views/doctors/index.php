@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="d-flex botones gap-3 mt-4 mt-md-0">
-                        <a href="/html/general/solicitarcita.html">
+                        <a href="<?php echo ROOT_URL . 'appointments/requestAppointment/' . $medico['id_usuario'] ?>">
                             <button type="button" class="btn text-dark btn-outline-secondary fl">Ver
                                 disponibilidad</button>
                         </a>
