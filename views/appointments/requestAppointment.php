@@ -107,7 +107,9 @@
             </div>
         <?php } ?>
         <div class="container boton d-flex justify-content-center col-7">
-            <button type="button" class="btn btn-dark text-light w-100">Solicitar cita</button>
+            <a href="<?php echo isset($_SESSION['is_logged_in']) ? ROOT_URL . 'contactForms/create/' . $viewmodel[0]['id_usuario'] : ROOT_URL . 'users/login' ?>">
+                <button type="button" class="btn btn-dark text-light w-100">Solicitar cita</button>
+            </a>
         </div>
     </div>
 </div>

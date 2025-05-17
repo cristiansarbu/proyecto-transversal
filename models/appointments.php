@@ -200,14 +200,16 @@
             // Sanitize the GET array
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $this->query("SELECT nombre, especialidad, consulta, correo, telefono
+            $this->query("SELECT id_usuario, nombre, especialidad, consulta, correo, telefono
                                 FROM medico WHERE id_usuario = :id_medico");
             $this->bind(':id_medico', $get['id']);
             $medico = $this->single();
 
+            $horario = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00"];
+            $horas_ocupadas = [];
+
             if (isset($post['fecha'])) {
-                $horario = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
-                            "13:00", "13:30", "14:00", "14:30", "15:00"];
                 // Sacar fechas en formato de hh:mm como en SQLServer para comparar con las horas predeterminadas
                 // https://www.dbload.com/articles/format-function-in-mssql-and-mysql.htm
                 $this->query("SELECT DATE_FORMAT(fecha, '%H:%i') AS hora
@@ -216,13 +218,11 @@
                 $this->bind(':fecha', $post['fecha'] );
                 $this->bind(':id_medico', $get['id'] );
                 $resultado = $this->resultSet();
-                $horas_ocupadas = [];
 
                 foreach ($resultado as $fila) {
                     array_push($horas_ocupadas, $fila['hora']);
                 }
             }
-
 
             return [$medico, $horas_ocupadas, $horario];
 

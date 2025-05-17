@@ -64,7 +64,7 @@
                                 disponibilidad</button>
                         </a>
                         <!-- De momento mandar a la página para crear formulario -> Funcionamiento normal será enviar al usuario a registrarse para luego poder solicitar una cita -->
-                        <a href="<?php echo ROOT_URL . 'contactForms/create/' . $medico['id_usuario'] ?>">
+                        <a href="<?php echo isset($_SESSION['is_logged_in']) ? ROOT_URL . 'contactForms/create/' . $medico['id_usuario'] : ROOT_URL . 'users/login' ?>">
                             <button type="button" class="btn btn-dark text-light">Solicitar cita</button>
                         </a>
                     </div>
