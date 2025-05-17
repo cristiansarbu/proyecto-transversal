@@ -100,6 +100,7 @@
             </div>
         </div>
     <?php } ?>
+</div>
 
 <!-- Pagination -->
 <!-- Hecho utilizando la query parameter "page" con índice 0 (+1 para no mostrar al usuario índice 0) -->
