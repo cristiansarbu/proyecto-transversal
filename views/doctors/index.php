@@ -1,32 +1,4 @@
-<!-- Search Bar -->
-<form action="" method="get" class="container d-flex flex-column flex-md-row gap-3 mb-7 mt-7 p-5 border rounded">
-    <div class="container input-group flex-grow-1">
-        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" fill="currentColor"
-            class="bi bi-search search-icon" viewBox="0 0 16 16">
-            <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-        </svg> -->
-        <input type="text" name="" id="" class="form-control rounded-pill ps-5" placeholder="Buscar por nombre">
-    </div>
-    <div class="container">
-        <div class="dropdown">
-            <a class="btn border-form-control rounded-pill dropdown-toggle p-2 px-5" href="#" role="button"
-               id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Especialidad
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Médico de familia</a></li>
-                <li><a class="dropdown-item" href="#">Enfermería</a></li>
-                <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                <li><a class="dropdown-item" href="#">Otorrinolaringología</a></li>
-            </ul>
-        </div>
-    </div>
-    <button type="button" class="btn btn-secondary rounded px-5">Buscar</button>
-</form>
-
-<div class="container d-flex flex-column gap-5 mb-7">
+<div class="container d-flex flex-column gap-5 mb-7 mt-5">
     <!-- Cards with Doctors -->
     <?php foreach ($viewmodel[0] as $medico) { ?>
         <div class="container doctor-card border d-flex flex-column p-4 rounded">

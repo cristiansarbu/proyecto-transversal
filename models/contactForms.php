@@ -37,6 +37,14 @@
             // Siempre habrá 3 elementos en cada página -> offset siempre es página * 3
             $formularios = $this->resultSet();
 
+            if (isset($_POST['submit'])) {
+                $this->query("DELETE FROM solicitud
+                                    WHERE id_solicitud = :id_solicitud");
+                $this->bind(':id_solicitud', $_POST['idsol']);
+                $this->execute();
+                return '';
+            }
+
             return [$formularios, $paginas];
         }
 
@@ -49,7 +57,6 @@
 
             // Sanitize the GET array
             $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-            print_r($get);
 
             $this->query("SELECT s.descripcion, s.fecha, p.nombre, p.dni, p.correo, p.telefono, p.fecha_nac
                                 FROM solicitud s

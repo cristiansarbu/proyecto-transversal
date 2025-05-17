@@ -45,7 +45,10 @@
                     <a href="<?php echo ROOT_URL . 'contactForms/details/' . $form['id_solicitud'] ?>">
                         <button type="button" class="btn text-dark btn-outline-secondary fl px-5">Ver detalles</button>
                     </a>
-                    <button type="button" class="btn btn-dark text-ligh px-4">Eliminar</button>
+                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="idsol" value="<?php echo $form['id_solicitud'] ?>">
+                        <button type="submit" name="submit" value="submit" class="btn btn-dark text-light px-4">Eliminar</button>
+                    </form>
                 </div>
             </div>
         </div>
