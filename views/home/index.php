@@ -5,7 +5,7 @@
             <div class="d-flex flex-column d-md-block align-items-center">
                 <h1 class="fw-bolder">Tu centro de salud de confianza...</h1>
                 <p>Cuidamos de ti ofreciendo el mejor personal del sector y tecnología de vanguardia.</p>
-                <a href="/html/login-signup/register.html">
+                <a href="<?php echo isset($_SESSION['is_logged_in']) ? ROOT_URL . '/doctors' : 'users/login' ?>">
                     <button type="button" class="btn btn-primary me-3">📅 Reservar cita</button>
                 </a>
                 <a href="#showcase">
