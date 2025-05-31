@@ -1,6 +1,5 @@
 # Proyecto Transversal - Consultorio médico
-<a>https://img.shields.io/badge/lang-en-blue</a>
-<a href="https://github.com/cristiansarbu/proyecto-transversal">![](https://img.shields.io/badge/lang-en-blue</a>
+<a href="https://github.com/cristiansarbu/proyecto-transversal"><img src="https://img.shields.io/badge/lang-en-blue"></a>
 
 
 Aplicación CRUD MVC hecha en PHP como proyecto transversal para primero de Grado Superior de Desarrollo de Aplicaciones Web. Primer contacto con PHP, MVC y Bootstrap 5.
