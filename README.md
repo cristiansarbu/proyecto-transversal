@@ -38,11 +38,11 @@ Unregistered patients can view and search the list of doctors as well as their a
 ## Deployment
 To deploy the project with Docker, use the following commands:
 1. First, clone the repository:
-	```git
+	```bash
 	git clone https://github.com/cristiansarbu/proyecto-transversal.git
 	``` 
 2. The Apache and PHP image is automatically obtained from this repository's container registry with docker-compose. Start the containers:
-	```docker
+	```bash
 	docker compose up
 	```
 3. The page is now available and can be accessed at: http://localhost/ProyectoTransversal/
