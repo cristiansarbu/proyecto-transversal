@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:lts
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: consultorio
+    ports:
+      - "3310:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./consultorioBD.sql:/docker-entrypoint-initdb.d/consultorio.sql
+  php-apache:
+    image: ghcr.io/cristiansarbu/apache-php-pdo:latest
+    container_name: php-apache
+    volumes:
+      - ./:/var/www/html/ProyectoTransversal
+    ports:
+      - "80:80"
+
+volumes:
+  db_data:
